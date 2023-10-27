@@ -1,0 +1,28 @@
+body {
+    background: black;
+  }
+  
+  .container{
+    padding: 30px;
+    border: 1px solid blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  #circle {
+    outline: solid 4px green;
+    height: 500px;
+    width: 500px;
+    background: transparent;
+    border-radius: 50%;
+  }
+  
+  #player {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: blue;
+      border-radius: 50%;
+  }
