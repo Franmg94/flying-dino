@@ -1,20 +1,18 @@
-const player = document.getElementById("player");
-const container = document.getElementById("gameContainer");
-
-let angle = 0; // Initial angle
-
-function movePlayer() {
-    angle -= 1; // Adjust this value to control the speed of movement
-    const radians = (angle * Math.PI) / 180;
-    const radius = container.clientWidth / 2;
-
-    const x = container.clientWidth / 2 + radius * Math.cos(radians);
-    const y = container.clientHeight / 2 + radius * Math.sin(radians);
-
-    player.style.left = x - player.clientWidth / 2 + "px";
-    player.style.top = y - player.clientHeight / 2 + "px";
-
-    requestAnimationFrame(movePlayer);
-}
-
-movePlayer();
+class Player {
+    constructor(){
+      // initialize properties
+      this.width = 2;
+      this.height = 4;
+      this.positionX = 3;
+      this.positionY = 0;
+      
+      //dom manipulation
+      this.playerCharacter = document.getElementById('player');
+      this.playerCharacter.style.width = this.width + "em";
+      this.playerCharacter.style.height = this.height + "em";
+      this.playerCharacter.style.left = this.positionX + "vw";
+      this.playerCharacter.style.bottom = this.positionY + "vh";
+    }
+  }
+  
+  const player = new Player();

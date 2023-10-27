@@ -1,59 +1,29 @@
-# Minimalist Circle platform
-
 ## 1. Define MVP
 
-The board is a circle. 
+The board is moving horizontally with obstacles that the player needs to avoid jumping 
 
-The player moves only in the circumference of the circle, left and right. 
-The obstacles comes from the center of the circle. 
+The player can only move vertically, and the force of gravity is always present, meaning that the player is always moving down except when we press a key to move up. 
 
-The obstacles are lines that create walls on the circle, so the player needs to change the direction in order to avoid collision. 
+The player has to go jump through the obstacles.
 
 ## 2. Define Milestones
 
-*Version 1: Basic game*
+Milestone1: Display the player and one obstacle
 
-m1: Display the player and the board
+- Player movement up and down
+- Obstacle movement towards the left
 
-- Create the circle
-- Create the player
+v2: Generate collision and new obstacles
 
-m2: Move the player around the circle
+- Identify collision and stop game
+- Create new obstacles that are removed when reached the end
 
-- Find the way to move the player only in circular way
-- Right, Left and Stop
+v3: Diversity of obstacles and physics
 
-m3:  Create obstacle
-
-- Create one obstacle that moves from the center out
-
-m4: Diversity of obstacles and physic
-
-- Add collision to the obstacle
-
-m5: Improve style 
-
-- Have a retro-neon color style
-- Moving background image so gives movement sensation
-- Initial interface, Initialize game and Game Over screen
-
----
-
-**Further Improvement**
-
-*Version 2:   Improving game mechanics*
-
-m6: Add levels
-
+- Create a pattern of obstacles that the player needs to avoid (the distance of the empty space of the obstacles affects the difficulty of the user experience)
 - Adjust the speed of the movement of the obstacles and the movement of the player
+- Implement physics for the player (gravity)
 
-m7: Add Power ups
+v4: Make it pretty
 
-- The player get the ability **Break**,
-- It can only have one
-- It restores automatically after 15 seconds
-- (Further improvement, change the timer for a pick up item)
-
-m8: Add **shooting**
-
-Version 3 Matching colors
+- Find images background

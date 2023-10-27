@@ -1,28 +1,15 @@
 body {
-    background: black;
-  }
-  
-  .container{
-    padding: 30px;
-    border: 1px solid blue;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    
-  }
-  
-  #circle {
-    outline: solid 4px green;
-    height: 500px;
-    width: 500px;
-    background: transparent;
-    border-radius: 50%;
-  }
-  
-  #player {
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: blue;
-      border-radius: 50%;
-  }
+  background: black;
+}
+
+.board{
+  position: relative;
+  outline: solid 3px orange;
+  height: 90vh;
+  width: 90%;
+}
+
+#player{
+  position: absolute; 
+  background: green;
+}
