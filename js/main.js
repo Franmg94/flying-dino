@@ -13,6 +13,48 @@ class Player {
       this.playerCharacter.style.left = this.positionX + "vw";
       this.playerCharacter.style.bottom = this.positionY + "vh";
     }
+    moveRight(){
+      console.log('Right');
+      this.positionX++;
+      this.playerCharacter.style.left = this.positionX + "em";
+    };
+    moveLeft(){
+      console.log('Left');
+      this.positionX--;
+      this.playerCharacter.style.left = this.positionX + "em";
+    };
+    moveUp(){
+      console.log('Up');
+      this.positionY++;
+      this.playerCharacter.style.bottom = this.positionY + "em";
+    };
+    moveDown(){
+      console.log('Down');
+      this.positionY--;
+      this.playerCharacter.style.bottom = this.positionY + "em";
+    };
   }
   
+
+  /////////////// Game
   const player = new Player();
+
+  
+  /////// Events
+
+  document.addEventListener("keydown", (e) => {
+    switch (e.code) {
+        case "ArrowRight":
+            player.moveRight();
+            break;
+        case "ArrowLeft":
+            player.moveLeft();
+            break;
+        case "ArrowUp":
+            player.moveUp();
+            break;
+        case "ArrowDown":
+            player.moveDown();
+            break;
+    }
+  });
