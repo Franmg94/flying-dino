@@ -2,13 +2,17 @@ body {
   background: black;
 }
 
-.board{
+#board{
   position: relative;
   outline: solid 3px orange;
   height: 90vh;
   width: 90%;
+  overflow: hidden;
 }
-
+.obstacle{
+  position: absolute;
+  background: blue;
+}
 #player{
   position: absolute; 
   background: green;
