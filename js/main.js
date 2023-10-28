@@ -39,7 +39,7 @@ class Obstacle {
   constructor() {
     this.width = 3;
     this.height = 4;
-    this.positionX = 70;
+    this.positionX = 80;
     this.positionY = 0;
     this.obstacle = null;
 
@@ -96,10 +96,38 @@ setInterval(() => {
   obstaclesArr.push(newObstacle)
 }, 5000);
 
-// Obstacle movement
+// Obstacle movement and stop obstacle
+setInterval(() => {
+  obstaclesArr.forEach((obstacle) => {
+    if (!collisionCheck(obstacle)) {
+      obstacle.moveLeft();
+    }
+  });
+ }, 200);
+
+ /// Obstacle mov and push player
  setInterval(() => {
-   obstaclesArr.forEach((obstacle) => {
-     obstacle.moveLeft();
-   })
- },200);
-  
+  obstaclesArr.forEach((obstacle) => {
+    if (collisionCheck(obstacle)) {
+      console.log("trying to push")
+      player.moveLeft();
+    }
+  });
+ }, 200);
+
+
+ /// Detect collision 
+
+ function collisionCheck(obstacle){
+  if(
+    player.positionX < obstacle.positionX + obstacle.width && 
+    player.positionX + player.width > obstacle.positionX &&
+    player.positionY < obstacle.positionY + obstacle.height &&
+    player.positionY + player.height > obstacle.positionY
+  ){
+    console.log('collision');
+    return true ;
+  } else {
+    return
+  }
+ }
