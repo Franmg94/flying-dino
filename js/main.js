@@ -7,52 +7,38 @@ class Player {
     this.height = 4;
     this.positionX = 3;
     this.positionY = 0;
+    this.player = null;
 
     //dom manipulation
-    this.playerCharacter = document.getElementById('player');
-    this.playerCharacter.style.width = this.width + "em";
-    this.playerCharacter.style.height = this.height + "em";
-    this.playerCharacter.style.left = this.positionX + "vw";
-    this.playerCharacter.style.bottom = this.positionY + "vh";
-
+    this.player = document.getElementById('player');
+    this.player.style.width = this.width + "em";
+    this.player.style.height = this.height + "em";
+    this.player.style.left = this.positionX + "vw";
+    this.player.style.bottom = this.positionY + "vh";
+    
+    this.move();
     this.gravity();
   }
-  moveRight() {
-    console.log(`Position X : ${this.positionX}`);
-    this.positionX++;
-    this.playerCharacter.style.left = this.positionX + "em";
-  };
-  moveLeft() {
-    console.log(`Position X : ${this.positionX}`);
-    this.positionX--;
-    this.playerCharacter.style.left = this.positionX + "em";
-  };
-  moveUp() {
-    console.log(`Position Y : ${this.positionY}`);
+  move(){      
+      this.player.style.left = this.positionX + "em";
+      this.player.style.left = this.positionX + "em";
+      this.player.style.bottom = this.positionY + "em";
+      this.player.style.bottom = this.positionY + "em";
+  }
+jump(){
+  for(let i=0; i < 5; i++){
     this.positionY++;
-    this.playerCharacter.style.bottom = this.positionY + "em";
   };
-  moveDown() {
-    console.log(`Position Y : ${this.positionY}`);
-    this.positionY--;
-    this.playerCharacter.style.bottom = this.positionY + "em";
-  };
-  jump(){
-    console.log(`Jump : ${this.positionY}`);
-    for(let i=0; i < 5; i++){
-      this.positionY++;
-    };
-    this.playerCharacter.style.bottom = this.positionY + "em";
-  };
-  gravity() {
-    setInterval(() => {
-      if (this.positionY > 0 || collisionCheck()) {
-        console.log(`Gravity : ${this.positionY}`)
-        this.positionY--;
-        this.playerCharacter.style.bottom = this.positionY + "em";
-      } 
-    }, 100)
-  };
+  this.player.style.bottom = this.positionY + "em";
+};
+gravity() {
+  setInterval(() => {
+    if (this.positionY > 0) {
+      this.positionY--;
+      this.player.style.bottom = this.positionY + "em";
+    } 
+  }, 100)
+};  
 }
 
 
@@ -103,32 +89,26 @@ const obstaclesArr = [];
 document.addEventListener("keydown", (e) => {
   switch (e.code) {
     case "ArrowRight":
-      player.moveRight();
+      player.positionX++;
+      player.move()         
       break;
     case "ArrowLeft":
-      player.moveLeft();
+      player.positionX--; 
+      player.move()  
       break;
     case "ArrowUp":
-      player.moveUp();
+      player.positionY++;
+      player.move()  
       break;
     case "ArrowDown":
-      player.moveDown();
+      player.positionY--;
+      player.move()  
       break;
     case "Space":
-      player.jump();
-      console.log(`Jump : ${this.positionY}`);
+      player.jump();           
       break;
   }
 });
-
-///////////////////////////////////////////////////////Check the key code
-document.addEventListener("keydown", (e) => {
-  console.log("Key code:", e.code); // Log the key code
-  console.log("Key:", e.key); // Log the key
-
-  // Your key event handling logic here
-});
-
 
 ///////////////////////////////////////////// Obstacles CREATION
 setInterval(() => {
@@ -136,11 +116,14 @@ setInterval(() => {
   obstaclesArr.push(newObstacle)
 }, 5000);
 
-////////////////////////////////////////////// Obstacle MOVEMENT and STOP obstacle
+////////////////////////////////////////////// Obstacle MOVEMENT and REMOVE obstacle
 setInterval(() => {
   obstaclesArr.forEach((obstacle) => {
     if (!collisionCheck(obstacle)) {
       obstacle.moveLeft();
+    }
+    if(obstacle.positionX + obstacle.width < 0){
+      obstaclesArr.splice(obstacle[0], 1);
     }
   });
 }, 200);
@@ -149,8 +132,8 @@ setInterval(() => {
 setInterval(() => {
   obstaclesArr.forEach((obstacle) => {
     if (collisionCheck(obstacle)) {
-      console.log("trying to push")
-      player.moveLeft();
+      player.positionX--;
+      player.move();
     }
   });
 }, 200);
@@ -171,11 +154,3 @@ function collisionCheck(obstacle) {
     return false;
   }
 };
-
-
-
-////////////////////////// GRAVITY
-//  const gravity = setInterval(() => {
-//   console.log("I'm gravity")
-//   player.positionY--;
-//  },10)
