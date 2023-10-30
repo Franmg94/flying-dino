@@ -17,3 +17,10 @@ body {
   position: absolute; 
   background: green;
 }
+#platform {
+  position: absolute;
+  top: 50vh;
+  background: orange;
+  width: 4vw;
+  height: 1vh;
+}
