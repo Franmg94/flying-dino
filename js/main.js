@@ -1,5 +1,3 @@
-///////////////////////// PLAYER
-
 class Player {
   constructor() {
     // initialize properties
@@ -8,9 +6,12 @@ class Player {
     this.positionX = 1;
     this.positionY = 24;
     this.player = null;
+    this.lives = 100;
 
     this.gravityOn = true;
     this.onGround = false;
+    this.onWall = false; 
+
 
     //dom manipulation
     this.player = document.getElementById('player');
@@ -22,16 +23,38 @@ class Player {
     this.move();
     this.gravity();
     
+    
   }
   move(){      
       this.player.style.left = this.positionX + "em";
       this.player.style.bottom = this.positionY + "em";
       
   }
-jump(){
-  for(let i=0; i < 10; i++){
+moveRight() {
+    if (!this.onWall) {
+      this.positionX++;
+      this.move();
+    }
+  }
+
+  moveLeft() {
+    this.positionX--;
+    this.move();
+  }
+
+  moveUp() {
     this.positionY++;
-  };
+    this.move();
+  }
+
+  moveDown() {
+    if (!this.onGround) {
+      this.positionY--;
+      this.move();
+    }
+  }
+jump(){
+  this.positionY += 15 ; 
   this.player.style.bottom = this.positionY + "em";
   this.onGround = false;
 };
@@ -48,41 +71,13 @@ gravity() {
     this.onGround = true;
     this.gravityOn = false;
   }
-    // this.gravityOn = true
-    // obstaclesArr.forEach(obs => {
-    //  if(collisionCheck(obs)){
-    //   this.gravityOn = false
-    //   console.log(this.onGround)
-    //  }
-    // });
-
-    // if (this.positionY > 0 && this.gravityOn && !this.onGround) {
-    //   this.positionY--;
-    //   this.move()
-    //   console.log(this.onGround)
-    // } 
-    // if(this.positionY === 0){
-    //   this.onGround = true;
-    //   console.log(this.onGround)
-    // } else if(this.gravityOn === false){
-    //   this.onGround = false;
-    //   console.log(this.onGround)
-    // } 
 }
 }
-
-// setInterval(() => {
-//   if(player.gravityOn) {
-//     move()
-//   }
-// },10)
-
-//////////// OBSTACLE
 
 class Obstacle {
   constructor() {
     this.width = 3;
-    this.height = Math.floor(Math.random() * 5 + 1);
+    this.height = Math.floor(Math.random() * 10 + 1);
     this.positionX = 80;
     this.positionY = 0;
     this.obstacle = null;
@@ -139,46 +134,52 @@ const platform = new Platform();
 
 
 
-
 ///////////// SETTINGS/////////////////////////////////
 
 ///////////////////////// Game loop
 function gameLoop() {
+  ///////////////// Character update
   player.move();
   player.gravity();
-
-  
+  console.log(player.onWall)
   //////////////////////   On the platform
   platformCollision(player, platform);
-
   // Stays on TOP!!
   obstaclesArr.forEach((obstacle) => {  
   onTop(player, obstacle) 
 })
-
+obstaclesArr.forEach((obstacle) => {
+  if(collisionCheck(obstacle)){
+    player.onWall = true;
+  }
+})
+////////////////  lives
+floorLava();
 
   requestAnimationFrame(gameLoop);    // This keeps the loop running
 }
 
+const floorLava = function livesCount() {
+  if(player.positionY <= 0){
+    player.lives -= 0.5;
+    console.log(player.lives)
+  }
+}
 
 ///////////////////////////////////////////////////  Player MOVEMENT
 document.addEventListener("keydown", (e) => {
   switch (e.code) {
-    case "ArrowRight":
-      player.positionX++;
-      player.move()         
+  case "ArrowRight":
+    player.moveRight();
       break;
     case "ArrowLeft":
-      player.positionX--; 
-      player.move()  
+      player.moveLeft(); 
       break;
     case "ArrowUp":
-      player.positionY++;
-      player.move()  
+      player.moveUp() ;
       break;
     case "ArrowDown":
-      player.positionY--;
-      player.move()  
+      player.moveDown();
       break;
     case "Space":
       player.jump();           
@@ -189,7 +190,7 @@ document.addEventListener("keydown", (e) => {
 setInterval(() => {
   const newObstacle = new Obstacle();
   obstaclesArr.push(newObstacle)
-}, 5000);
+}, 2000);
 
 ////////////////////////////////////////////// Obstacle MOVEMENT and REMOVE obstacle
 setInterval(() => {
@@ -206,6 +207,7 @@ setInterval(() => {
 setInterval(() => {
   obstaclesArr.forEach((obstacle) => {
     if (collisionCheck(obstacle)) {
+      player.onWall = true; 
       player.positionX--;
       player.move();
     }
@@ -246,8 +248,10 @@ function onTop(r1, r2) {
       player.positionY < obstacle.positionY + obstacle.height &&
       player.positionY + player.height > obstacle.positionY
     ) {
+      player.onWall = true;
       return true;
     } else {
+      player.onWall = false; 
       return false;
     }
   };
