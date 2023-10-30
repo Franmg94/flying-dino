@@ -24,3 +24,7 @@ body {
   width: 4vw;
   height: 1vh;
 }
+
+#page-gameover{
+  background: white;
+}
