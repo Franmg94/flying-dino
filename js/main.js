@@ -9,6 +9,8 @@ class Player {
     this.positionY = 0;
     this.player = null;
 
+    this.gravityOn = false
+
     //dom manipulation
     this.player = document.getElementById('player');
     this.player.style.width = this.width + "em";
@@ -33,10 +35,16 @@ jump(){
 };
 gravity() {
   setInterval(() => {
-    if (this.positionY > 0) {
+    this.gravityOn = true
+    if (this.positionY > 0 && this.gravityOn) {
       this.positionY--;
       this.player.style.bottom = this.positionY + "em";
     } 
+    obstaclesArr.forEach(obs => {
+     if(collisionCheck(obs)){
+      this.gravityOn = false
+     }
+    })
   }, 100)
 };  
 }
@@ -148,6 +156,12 @@ function collisionCheck(obstacle) {
     player.positionY < obstacle.positionY + obstacle.height &&
     player.positionY + player.height > obstacle.positionY
   ) {
+    if(player.positionY > obstacle.positionY ){
+      player.positionY =  obstacle.height 
+      player.positionX-- 
+ player.move()
+      player.gravityOn = false
+    }
     console.log('collision');
     return true;
   } else {
