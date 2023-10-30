@@ -8,22 +8,82 @@ The player has to go jump through the obstacles.
 
 ## 2. Define Milestones
 
-Milestone1: Display the player and one obstacle
+### M1: Display the player and one obstacle
 
-- Player movement up and down
-- Obstacle movement towards the left
+- [x]  Display and create Character class
+- [x]  Player movement up and down (create event listener)
+- [x]  Display and create Obstacle object
+    - Class and Dom initialize[X]
+        - initialize properties
+    - Create element( ) and call from the constructor[X]
+        - AppendChild
+    - Display Obstacles [X]
+        - Create an empty array
+        - setInterval to create new Instances of Obstacle ( )
 
-v2: Generate collision and new obstacles
+- [x]  Obstacle movement towards the left
+- setInterval moving obstacles left
 
-- Identify collision and stop game
-- Create new obstacles that are removed when reached the end
+- [x]  Set the screen size
+- overflow: hidden;
 
-v3: Diversity of obstacles and physics
+---
 
-- Create a pattern of obstacles that the player needs to avoid (the distance of the empty space of the obstacles affects the difficulty of the user experience)
-- Adjust the speed of the movement of the obstacles and the movement of the player
-- Implement physics for the player (gravity)
+### M2. Generate collision and new obstacles
 
-v4: Make it pretty
+- [x]  Identify collision
+- Create a function only for collision (X)
+- Stop moving when collision (X)
 
-- Find images background
+ 
+
+- [x]  Push
+    
+    Obstacles pushing when there’s a collision (X)
+    
+
+---
+
+### M3. Diversity of obstacles and physics
+
+- [x]  Different highs of obstacles
+- Adjust the height of each object randomly
+
+- [x]  Gravity
+- Function that is always substracting positionY from player
+
+- [x]  Jump
+- Create new method in Player class
+
+---
+
+### M4. Game mechanics
+
+- [ ]  Game loop function
+- [ ]  Game update status
+
+- [ ]  Improve collision
+- Player needs to stand on top of the obstacles
+
+Why it’s not working? 
+The collision update needs to happen when the player is moving, 
+
+I’ll try to check it through game loop.
+
+What other things can I start working on?
+
+- [ ]  Game over
+When player hits the ground loses one live, or game  over.
+
+- [ ]  Objectives?
+
+---
+
+### *Further ideas*
+
+V2: 
+
+- [ ]  Smooth movement: adjust speed of the objects
+- [ ]  Abilities like shooting
+- [ ]  Day and Night Phase: during one phase you collect staff and its easy, during the other phase it gets harder and more obstacles, colors change
+- [ ]  Grounded boolean: check if the player is on the ground or not
