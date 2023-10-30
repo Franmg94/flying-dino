@@ -131,6 +131,11 @@ const player = new Player();
 const obstaclesArr = [];
 const platform = new Platform(); 
 
+const lives = document.createElement('div')
+lives.setAttribute("class", "healthBar")
+
+const parentBoard = document.getElementById("board");
+parentBoard.appendChild(lives);
 
 
 
@@ -142,6 +147,8 @@ function gameLoop() {
   player.move();
   player.gravity();
   console.log(player.onWall)
+
+  lives.innerHTML = 'HP' + player.lives;
   //////////////////////   On the platform
   platformCollision(player, platform);
   // Stays on TOP!!
@@ -163,6 +170,9 @@ const floorLava = function livesCount() {
   if(player.positionY <= 0){
     player.lives -= 0.5;
     console.log(player.lives)
+  }
+  if(player.lives === 0){
+    location.href = "./gameover.html";
   }
 }
 

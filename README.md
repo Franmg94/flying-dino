@@ -59,23 +59,20 @@ The player has to go jump through the obstacles.
 
 ### M4. Game mechanics
 
-- [ ]  Game loop function
-- [ ]  Game update status
-
-- [ ]  Improve collision
+- [x]  Improve collision TODAY
+- [x]  Grounded boolean: check if the player is on the ground or not
 - Player needs to stand on top of the obstacles
+- Improve: There’s is something with the time of gravity, if it’s too fast it pushes down the character. For now I’ll leave it like that.
+- [x]  Starting point
+- Create a platform from where the player starts jumping
+- Create a div in the html
 
-Why it’s not working? 
-The collision update needs to happen when the player is moving, 
+- [x]  Game over
+- When player touches the ground, loses 1 live
+- When 0, moves to a different page (create, html, link, etc)
 
-I’ll try to check it through game loop.
-
-What other things can I start working on?
-
-- [ ]  Game over
-When player hits the ground loses one live, or game  over.
-
-- [ ]  Objectives?
+- [x]  HealthBar
+- Show HP on screen
 
 ---
 
@@ -84,6 +81,6 @@ When player hits the ground loses one live, or game  over.
 V2: 
 
 - [ ]  Smooth movement: adjust speed of the objects
-- [ ]  Abilities like shooting
-- [ ]  Day and Night Phase: during one phase you collect staff and its easy, during the other phase it gets harder and more obstacles, colors change
-- [ ]  Grounded boolean: check if the player is on the ground or not
+- [ ]  Abilities like shooting or breaking obstacle
+
+- [ ]  Day and Night Phase: during one phase you collect staff and its chill, during the other phase it gets harder and more obstacles

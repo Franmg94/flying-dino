@@ -28,3 +28,13 @@ body {
 #page-gameover{
   background: white;
 }
+
+.healthBar{
+  background: white;
+  height: 4em;
+  width: 4em;
+  position: absolute;
+  margin-top: 4em;
+  margin-left: 4em;
+  text-align: center;
+}
