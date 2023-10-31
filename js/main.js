@@ -1,5 +1,6 @@
 import Player from "./player.js";
 import Obstacle from "./obstacle.js";
+import Enemy from "./enemy.js";
 
 class Platform {
   constructor(){
@@ -25,9 +26,15 @@ class Platform {
 
 
 /////////////// GAME INITIALIZE   ///////////////////////////
+let randomY;  // not working
+
+// console.log(randomY);
+// setTimeout(()=>{console.log(randomY);},2000)
+
 const player = new Player();
 const obstaclesArr = [];
 const platform = new Platform(); 
+const enemy = new Enemy(randomY);
 
 ////////////////////////////////////////////// HP
 const lives = document.createElement('div')
@@ -106,6 +113,8 @@ setInterval(() => {
   });
 }, 200);
 
+
+
 ////////////////////////// Detect COLLISION 
 function platformCollision(r1, r2){   
   if (
@@ -158,6 +167,7 @@ function gameLoop() {
   player.move();
   player.gravity();
 
+  enemy.moveLeft();
   ///////////////////////////////////////////Update Bars
   lives.innerHTML = 'HP' + player.lives;
   timeBar.innerHTML = 'Time' + timeCount;
@@ -178,7 +188,14 @@ obstaclesArr.forEach((obstacle) => {
     player.onWall = true;
   }
 })
-
+///////////////////// Enemy
+randomY = Math.floor((Math.random() * (100 - 1) + 1));
+//// Push
+enemy.push();
+////////////// Respawn
+if(enemy.X < 0){
+  enemy.reappear();
+}
 ////////////////  Damage
 groundDamange();
 
