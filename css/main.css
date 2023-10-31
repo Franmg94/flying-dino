@@ -20,13 +20,14 @@ body {
   position: absolute;
   outline: solid 1px blue;
   background-image: url('/images/platform-big.png');
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   
 }
 #player{
   position: absolute; 
+  outline: solid 1px white;
   /* background: green; */
   background-image: url('/images/dino.gif');
   background-size: cover;
@@ -47,11 +48,8 @@ body {
 
 #platform {
   position: absolute;
-  top: 50vh;
-  width: 4vw;
-  height: 10vh;
   background-image: url('/images/platform-small.png');
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
   outline: solid 1px gray;

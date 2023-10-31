@@ -2,8 +2,8 @@ import Player from "./player.js";
 import Obstacle from "./obstacle.js";
 import Enemy from "./enemy.js";
 import Platform from "./platform.js";
-
-
+import Bullet from "./bullet.js";
+   
 
 /////////////// GAME INITIALIZE   ///////////////////////////
 let randomY;  // not working
@@ -14,6 +14,9 @@ let randomY;  // not working
 const player = new Player();
 const platform = new Platform();
 const obstaclesArr = [];
+
+let bullet = new Bullet(this.positionX, this.positionY);
+bullet.moveRight() 
 
 const enemy = new Enemy();
 
@@ -34,9 +37,9 @@ timeBar.setAttribute("class", "timeBar");
 parentBoard.appendChild(timeBar);
 let timeCount = 30;
 
-setInterval(() => {
-  timeCount--;
-}, 1000)
+// setInterval(() => {
+//   timeCount--;
+// }, 1000)
 
 ///////////// SETTINGS/////////////////////////////////
 
@@ -51,25 +54,25 @@ const groundDamange = function livesCount() {
 }
 
 ///////////////////////////////////////////////////  Player MOVEMENT
-document.addEventListener("keydown", (e) => {
-  switch (e.code) {
-    case "ArrowRight":
-      player.moveRight();
-      break;
-    case "ArrowLeft":
-      player.moveLeft();
-      break;
-    case "ArrowUp":
-      player.jump();
-      break;
-    case "ArrowDown":
-      player.moveDown();
-      break;
-    case "Space":
-      player.shoot();
-      break;
-  }
-});
+// document.addEventListener("keydown", (e) => {
+//   switch (e.code) {
+//     case "ArrowRight":
+//       player.moveRight();
+//       break;
+//     case "ArrowLeft":
+//       player.moveLeft();
+//       break;
+//     case "ArrowUp":
+//       player.jump();
+//       break;
+//     case "ArrowDown":
+//       player.moveDown();
+//       break;
+//     case "Space":
+//       player.shoot();
+//       break;
+//   }
+// });
 
 ///////////////////////////////////////////// Obstacles CREATION
 setInterval(() => {
@@ -180,6 +183,8 @@ function collisionCheck(obstacle) {
     return false;
   }
 };
+
+
 function collisionCheck2(enemy) {
   if (
     player.positionX < enemy.positionX + enemy.width &&
@@ -243,16 +248,11 @@ function gameLoop() {
   }
 
   //// Push
-enemyPush(player, enemy)
 
-  // if(enemy.positionX === player.positionX + player.width && enemy.positionY +enemy.height === player.positionY + player.height){
-  //   console.log('touched!');
-  //         player.onWall = true;
-  //         player.positionX -= enemy.speed;
-  //         player.move();
-  // }
+
+ 
   ////////////////  Damage
-  groundDamange();
+  //groundDamange();
 
   requestAnimationFrame(gameLoop);    // This keeps the loop running
 }
