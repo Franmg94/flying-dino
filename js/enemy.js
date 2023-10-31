@@ -1,53 +1,49 @@
 export default class Enemy {
-    constructor(){
-        this.X = 80;
-        this.Y = 40;
+    constructor() {
+        this.positionX = 80;
+        this.positionY = 24;
         this.width = 2;
         this.height = 3;
         this.HP = 2;
-        this.speed = 0.5;
+        this.speed = 0.1;
         this.enemy = null;
 
         this.enemy = document.createElement('div');
         this.enemy.classList.add("enemy");
         this.enemy.style.width = this.width + 'em';
         this.enemy.style.height = this.height + 'em';
-        this.enemy.style.left = this.X + "vw";
-        this.enemy.style.bottom = this.Y + "vh";
+        this.enemy.style.left = this.positionX + "vw";
+        this.enemy.style.top = this.positionY + "vh";
+
 
         const parentBoard = document.getElementById("board");
         parentBoard.appendChild(this.enemy);
-        
-        console.log('Im here')
 
+        console.log('I\'m here');
+        // this.push();
         this.reappear();
-        
     }
-    moveUp(){
-        this.Y += this.speed;
-        this.enemy.style.bottom = this.Y + "vh"
+
+    moveUp() {
+        this.positionY += this.speed;
+        this.enemy.style.bottom = this.positionY + "vh";
     }
-    moveDown(){
-        this.Y -= this.speed;
-        this.enemy.style.bottom = this.Y + "vh"
+
+    moveDown() {
+        this.positionY -= this.speed;
+        this.enemy.style.bottom = this.positionY + "vh";
     }
-    moveLeft(){
-        this.X -= this.speed;
-        this.enemy.style.left = this.X + "vw"
+
+    moveLeft() {
+        this.positionX -= this.speed;
+        this.enemy.style.left = this.positionX + "vw";
     }
-    reappear(){
-       setTimeout(()=>{this.X = 80;},1000)
+
+    reappear() {
+        setTimeout(() => {
+            this.positionX = 80;
+        }, 1000);
     }
-    push(){
-        if (
-            player.positionX < this.enemy.X + this.enemy.width &&
-            player.positionX + player.width > this.enemy.X &&
-            player.positionY < this.enemy.Y + this.enemy.height &&
-            player.positionY + player.height > this.enemy.Y
-          ) {
-            player.onWall = true; 
-            player.positionX--;
-            player.move();
-          } 
-    }
+
+
 }

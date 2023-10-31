@@ -25,4 +25,5 @@ export default class Obstacle {
     this.positionX--;
     this.obstacle.style.left = this.positionX + "em";
   }
+  
 }

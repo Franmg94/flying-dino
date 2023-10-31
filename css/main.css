@@ -23,7 +23,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-
+  
 }
 #player{
   position: absolute; 
@@ -32,8 +32,19 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-
+  
 }
+
+.enemy{
+  position: absolute;
+  background: red;
+  outline: solid 2px black;
+  background-image: url('/images/enemy.gif');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 #platform {
   position: absolute;
   top: 50vh;
