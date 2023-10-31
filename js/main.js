@@ -1,107 +1,5 @@
-class Player {
-  constructor() {
-    // initialize properties
-    this.width = 2;
-    this.height = 4;
-    this.positionX = 1;
-    this.positionY = 24;
-    this.player = null;
-    this.lives = 100;
-
-    this.gravityOn = true;
-    this.onGround = false;
-    this.onWall = false; 
-
-
-    //dom manipulation
-    this.player = document.getElementById('player');
-    this.player.style.width = this.width + "em";
-    this.player.style.height = this.height + "em";
-    this.player.style.left = this.positionX + "vw";
-    this.player.style.bottom = this.positionY + "vh";
-    
-    this.move();
-    this.gravity();
-    
-    
-  }
-  move(){      
-      this.player.style.left = this.positionX + "em";
-      this.player.style.bottom = this.positionY + "em";
-      
-  }
-moveRight() {
-    if (!this.onWall) {
-      this.positionX++;
-      this.move();
-    }
-  }
-
-  moveLeft() {
-    this.positionX--;
-    this.move();
-  }
-
-  moveUp() {
-    this.positionY++;
-    this.move();
-  }
-
-  moveDown() {
-    if (!this.onGround) {
-      this.positionY--;
-      this.move();
-    }
-  }
-jump(){
-  this.positionY += 15 ; 
-  this.player.style.bottom = this.positionY + "em";
-  this.onGround = false;
-};
-gravity() {
-  if(this.onGround) {
-    this.gravityOn = false
-    this.onGround = true
-  } else if (this.onGround === false && this.positionY > 0) {
-    this.gravityOn = true;
-    this.onGround = false;
-    this.positionY -=  0.3;
-     this.move();
-  } else if(this.positionY === 0){
-    this.onGround = true;
-    this.gravityOn = false;
-  }
-}
-}
-
-class Obstacle {
-  constructor() {
-    this.width = 3;
-    this.height = Math.floor(Math.random() * 10 + 1);
-    this.positionX = 80;
-    this.positionY = 0;
-    this.obstacle = null;
-
-    this.createDomObstacle();
-  }
-
-  createDomObstacle() {
-    this.obstacle = document.createElement("div");
-
-    this.obstacle.classList.add("obstacle");
-    this.obstacle.style.width = this.width + "em";
-    this.obstacle.style.height = this.height + "em";
-    this.obstacle.style.left = this.positionX + "vw";
-    this.obstacle.style.bottom = this.positionY + "vh";
-
-    const parentBoard = document.getElementById("board");
-    parentBoard.appendChild(this.obstacle);
-  }
-  moveLeft() {
-    this.positionX--;
-    this.obstacle.style.left = this.positionX + "em";
-  }
-}
+import Player from "./player.js";
+import Obstacle from "./obstacle.js";
 
 class Platform {
   constructor(){
@@ -131,45 +29,28 @@ const player = new Player();
 const obstaclesArr = [];
 const platform = new Platform(); 
 
+////////////////////////////////////////////// HP
 const lives = document.createElement('div')
 lives.setAttribute("class", "healthBar")
-
 const parentBoard = document.getElementById("board");
 parentBoard.appendChild(lives);
 
-
+////////////////////////////////////////////////////// Timer
+const timeBar = document.createElement('div');
+  timeBar.setAttribute("class", "timeBar");
+  parentBoard.appendChild(timeBar);
+  let timeCount = 30;
+  
+  setInterval(() => {
+    timeCount--;
+  },1000)
 
 ///////////// SETTINGS/////////////////////////////////
 
-///////////////////////// Game loop
-function gameLoop() {
-  ///////////////// Character update
-  player.move();
-  player.gravity();
-  console.log(player.onWall)
 
-  lives.innerHTML = 'HP' + player.lives;
-  //////////////////////   On the platform
-  platformCollision(player, platform);
-  // Stays on TOP!!
-  obstaclesArr.forEach((obstacle) => {  
-  onTop(player, obstacle) 
-})
-obstaclesArr.forEach((obstacle) => {
-  if(collisionCheck(obstacle)){
-    player.onWall = true;
-  }
-})
-////////////////  lives
-floorLava();
-
-  requestAnimationFrame(gameLoop);    // This keeps the loop running
-}
-
-const floorLava = function livesCount() {
+const groundDamange = function livesCount() {
   if(player.positionY <= 0){
     player.lives -= 0.5;
-    console.log(player.lives)
   }
   if(player.lives === 0){
     location.href = "./gameover.html";
@@ -186,16 +67,17 @@ document.addEventListener("keydown", (e) => {
       player.moveLeft(); 
       break;
     case "ArrowUp":
-      player.moveUp() ;
+      player.jump() ;
       break;
     case "ArrowDown":
       player.moveDown();
       break;
     case "Space":
-      player.jump();           
+      player.shoot();           
       break;
   }
 });
+
 ///////////////////////////////////////////// Obstacles CREATION
 setInterval(() => {
   const newObstacle = new Obstacle();
@@ -223,6 +105,7 @@ setInterval(() => {
     }
   });
 }, 200);
+
 ////////////////////////// Detect COLLISION 
 function platformCollision(r1, r2){   
   if (
@@ -267,4 +150,38 @@ function onTop(r1, r2) {
   };
   
 
+
+///////////////////////////////////////////////////////// Game loop
+function gameLoop() {
+
+  ///////////////// Character update
+  player.move();
+  player.gravity();
+
+  ///////////////////////////////////////////Update Bars
+  lives.innerHTML = 'HP' + player.lives;
+  timeBar.innerHTML = 'Time' + timeCount;
+
+  /////////////////////////// Win condition
+  if(timeCount === 0){
+    location.href = "./win.html"
+  }
+  
+  //////////////////////   On the platform
+  platformCollision(player, platform);
+  // Stays on TOP!!
+  obstaclesArr.forEach((obstacle) => {  
+  onTop(player, obstacle) 
+})
+obstaclesArr.forEach((obstacle) => {
+  if(collisionCheck(obstacle)){
+    player.onWall = true;
+  }
+})
+
+////////////////  Damage
+groundDamange();
+
+  requestAnimationFrame(gameLoop);    // This keeps the loop running
+}
 gameLoop();

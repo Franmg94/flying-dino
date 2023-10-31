@@ -2,27 +2,48 @@ body {
   background: black;
 }
 
-#board{
+
+#board {
+  margin: auto;
   position: relative;
   outline: solid 3px orange;
   height: 90vh;
-  width: 90%;
+  width: 80%;
   overflow: hidden;
+  background-image: url('/images/back.png'); /* Use forward slashes for the image path */
+  background-size: cover; /* Adjust these properties as needed */
+  background-repeat: no-repeat;
+  background-position: center center;
 }
-.obstacle{
+
+.obstacle {
   position: absolute;
-  background: blue;
+  outline: solid 1px blue;
+  background-image: url('/images/platform-big.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
 }
 #player{
   position: absolute; 
-  background: green;
+  /* background: green; */
+  background-image: url('/images/dino.gif');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
 }
 #platform {
   position: absolute;
   top: 50vh;
-  background: orange;
   width: 4vw;
-  height: 1vh;
+  height: 10vh;
+  background-image: url('/images/platform-small.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  outline: solid 1px gray;
 }
 
 #page-gameover{
@@ -36,5 +57,15 @@ body {
   position: absolute;
   margin-top: 4em;
   margin-left: 4em;
+  text-align: center;
+}
+
+.timeBar{
+  background: white;
+  height: 4em;
+  width: 4em;
+  position: absolute;
+  margin-top: 4em;
+  margin-right: 4em;
   text-align: center;
 }

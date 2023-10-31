@@ -1,4 +1,4 @@
-class Obstacle {
+export default class Obstacle {
   constructor() {
     this.width = 3;
     this.height = Math.floor(Math.random() * 10 + 1);
