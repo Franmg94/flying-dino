@@ -16,7 +16,7 @@ const platform = new Platform();
 const obstaclesArr = [];
 const bulletArr = [];
 
-
+const enemyArr = [];
 const enemy = new Enemy();
 
 // const audioOnGame = document.getElementById('onGame-music');
@@ -34,13 +34,13 @@ lives.setAttribute("class", "healthBar")
 const parentBoard = document.getElementById("board");
 parentBoard.appendChild(lives);
 
-////////////////////////////////////////////////////// Timer
+////////////////////////////////////////////////////// Timer Bar
 const timeBar = document.createElement('div');
 timeBar.setAttribute("class", "timeBar");
 parentBoard.appendChild(timeBar);
 let timeCount = 30;
 
-setInterval(() => {
+setInterval(() => {    /// Countdown
   timeCount--;
 }, 1000)
 
@@ -55,16 +55,17 @@ const playerShoot = function shootBullet(){
   }
 }
 
+function bulletDmg(){};
+
 
 const groundDamange = function livesCount() {
   if (player.positionY <= 0) {
-    player.lives -= 0.5;
-  }
+    player.lives--;
+  }  
   if (player.lives === 0) {
     location.href = "./gameover.html";
-  }
-}
-
+  }  
+}  
 
 setInterval(() => {         //////////////////////// obstacle CREATION
   const newObstacle = new Obstacle();
@@ -122,6 +123,7 @@ function enemyPush(player, enemy) {        ////////////////////////////// Detect
     console.log('enemyPush: Touched enemy');
     player.onWall = true;
     player.positionX -= enemy.speed;
+    player.lives--;
     player.move();
     player.gravityOn = false;
   }
@@ -155,6 +157,7 @@ function gameLoop() {             ///////////////////// Game loop
 
   ///////////////////////////////// PUSH 
   enemyPush(player, enemy);
+
   obstaclesArr.forEach(obstacle=>enemyPush(player, obstacle));
   
 
