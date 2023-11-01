@@ -6,7 +6,7 @@ export default class Player {
     this.width = 2;
     this.height = 4;
     this.positionX = 1;
-    this.positionY = 24;
+    this.positionY = 40;
     this.speed = 0.5;
     this.player = null;
     this.lives = 100;
@@ -22,8 +22,8 @@ export default class Player {
 
     //dom manipulation
     this.player = document.getElementById('player');
-    this.player.style.width = this.width + "em";
-    this.player.style.height = this.height + "em";
+    this.player.style.width = this.width + "vw";
+    this.player.style.height = this.height + "vh";
     this.player.style.left = this.positionX + "vw";
     this.player.style.bottom = this.positionY + "vh";
 
@@ -99,7 +99,7 @@ export default class Player {
   shoot() {
     console.log("shoot");
     let bullet = new Bullet(this.positionX, this.positionY);
-    bullet.moveRight()
+    
   }
 
   gravity() {

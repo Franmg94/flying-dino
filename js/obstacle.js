@@ -1,7 +1,7 @@
 export default class Obstacle {
   constructor() {
     this.width = 7;
-    this.height = 2;
+    this.height = 5;
     this.positionX = 80;
     this.positionY = Math.floor(Math.random() * (25 - 1) + 1);
     this.obstacle = null;
@@ -13,8 +13,8 @@ export default class Obstacle {
     this.obstacle = document.createElement("div");
 
     this.obstacle.classList.add("obstacle");
-    this.obstacle.style.width = this.width + "em";
-    this.obstacle.style.height = this.height + "em";
+    this.obstacle.style.width = this.width + "vw";
+    this.obstacle.style.height = this.height + "vh";
     this.obstacle.style.left = this.positionX + "vw";
     this.obstacle.style.bottom = this.positionY + "vh";
 
@@ -23,7 +23,7 @@ export default class Obstacle {
   }
   moveLeft() {
     this.positionX--;
-    this.obstacle.style.left = this.positionX + "em";
+    this.obstacle.style.left = this.positionX + "vw";
   }
   
 }

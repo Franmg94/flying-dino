@@ -3,15 +3,15 @@ export default class Enemy {
         this.positionX = 80;
         this.positionY = 24;
         this.width = 2;
-        this.height = 3;
+        this.height = 5;
         this.HP = 2;
-        this.speed = 0.1;
+        this.speed = 0.2;
         this.enemy = null;
 
         this.enemy = document.createElement('div');
         this.enemy.classList.add("enemy");
-        this.enemy.style.width = this.width + 'em';
-        this.enemy.style.height = this.height + 'em';
+        this.enemy.style.width = this.width + 'vw';
+        this.enemy.style.height = this.height + 'vh';
         this.enemy.style.left = this.positionX + "vw";
         this.enemy.style.bottom = this.positionY + "vh";
 

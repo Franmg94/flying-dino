@@ -7,7 +7,7 @@ import Platform from "./platform.js";
 
 /////////////// GAME INITIALIZE   ///////////////////////////
 let randomY;  // not working
-
+console.log(VisualViewport)
 // console.log(randomY);
 // setTimeout(()=>{console.log(randomY);},2000)
 
@@ -21,11 +21,12 @@ const obstaclesArr = [];
 const enemy = new Enemy();
 
 const audio = new Audio('./audio/platformer_level03.mp3');
-audio.play();
+// audio.play();
 
 console.log(player)
 console.log(enemy)
-////////////////////////////////////////////// HP
+
+////////////////////////////////////////////// HP Bar
 const lives = document.createElement('div')
 lives.setAttribute("class", "healthBar")
 const parentBoard = document.getElementById("board");
@@ -37,9 +38,9 @@ timeBar.setAttribute("class", "timeBar");
 parentBoard.appendChild(timeBar);
 let timeCount = 30;
 
-setInterval(() => {
-  timeCount--;
-}, 1000)
+// setInterval(() => {
+//   timeCount--;
+// }, 1000)
 
 ///////////// SETTINGS/////////////////////////////////
 
@@ -75,6 +76,9 @@ const groundDamange = function livesCount() {
 // });
 
 ///////////////////////////////////////////// Obstacles CREATION
+
+
+////////////////////////////////////////////// Obstacle CREATION
 setInterval(() => {
   const newObstacle = new Obstacle();
   obstaclesArr.push(newObstacle)
@@ -88,7 +92,7 @@ setInterval(() => {
       obstaclesArr.splice(obstacle[0], 1);
     }
   });
-}, 200);
+}, 150);
 
 
 /////////////////////////////////////////////////////// Obstacle mov and PUSH player
@@ -122,13 +126,15 @@ function platformCollision(r1, r2) {
     r1.positionY + r1.height > r2.positionY
   ) {
     player.onGround = true;
+    console.log('plaformCollision: on platform')
   } else {
     player.onGround = false;
   }
 }
 
-platformCollision(player, platform)
-platform
+// platformCollision(player, platform)
+
+
 function onTop(r1, r2) {
   if (
     r1.positionX < r2.positionX + r2.width &&
@@ -136,7 +142,7 @@ function onTop(r1, r2) {
     r1.positionY < r2.positionY + r2.height &&
     r1.positionY + r1.height > r2.positionY
   ) {
-    console.log('touched')
+    console.log('onTop: touched')
     player.onGround = true;
     player.gravityOn = false;
   };
@@ -148,7 +154,7 @@ function onTop2(r1, r2) {
     r1.positionY < r2.positionY + r2.height &&
     r1.positionY + r1.height > r2.positionY
   ) {
-    console.log('touched')
+    console.log('onTop2: touched enemy')
    
   };
 };
@@ -160,7 +166,7 @@ function enemyPush(player, enemy) {
     player.positionY < enemy.positionY + enemy.height &&
     player.positionY + player.height > enemy.positionY
   ) {
-    console.log('Touched enemy!');
+    console.log('enemyPush: Touched enemy');
     player.onWall = true;
     player.positionX -= enemy.speed;
     player.move();
@@ -185,14 +191,14 @@ function collisionCheck(obstacle) {
 };
 
 
-function collisionCheck2(enemy) {
+function collisionPush(enemy) {
   if (
     player.positionX < enemy.positionX + enemy.width &&
     player.positionX + player.width > enemy.positionX &&
     player.positionY < enemy.positionY + enemy.height &&
     player.positionY + player.height > enemy.positionY
   ) {
-    console.log('touched')
+    console.log('collsionPush: touched')
     player.onWall = true;
     player.positionX--;
     player.move();
@@ -214,7 +220,7 @@ function gameLoop() {
 
   enemy.moveLeft();
   onTop2(player, enemy);
-  collisionCheck2(enemy);
+  enemyPush(player, enemy);
   ///////////////////////////////////////////Update Bars
   lives.innerHTML = 'HP' + player.lives;
   timeBar.innerHTML = 'Time' + timeCount;

@@ -1,29 +1,29 @@
 body {
   background: black;
+  position: relative;
+  height: 100vh;
 }
 
 
 #board {
   margin: auto;
-  position: relative;
+  position: absolute;
   outline: solid 3px orange;
   height: 90vh;
-  width: 80%;
+  width: 80vw;
   overflow: hidden;
-  background-image: url('../images/back.png'); /* Use forward slashes for the image path */
+  background-image: url('../images/background-mountainclouds.png'); /* Use forward slashes for the image path */
   background-size: cover; /* Adjust these properties as needed */
   background-repeat: no-repeat;
   background-position: center center;
+  top: 0;
+  left:0;
+  right: 0;
+  bottom:0;
+
+
 }
-#player{
-  position: absolute; 
-  outline: solid 1px white;
-  /* background: green; */
-  background-image: url('../images/dino.gif');
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-}
+
 
 .obstacle {
   position: absolute;
@@ -59,7 +59,15 @@ body {
   background-position: center;
   outline: solid 1px gray;
 }
-
+#player{
+  position: absolute; 
+  outline: solid 1px white;
+  /* background: green; */
+  background-image: url('../images/dino.gif');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 #page-gameover{
   background: white;
 }
