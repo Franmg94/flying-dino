@@ -6,6 +6,7 @@ export default class Bullet {
         this.height = 1;
         this.speed = 1;
         this.bullet = null; 
+        
         this.bullet = document.createElement('div');
         this.bullet.classList.add("bullet");
         this.bullet.style.width = this.width + 'em';

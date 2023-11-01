@@ -20,8 +20,8 @@ const obstaclesArr = [];
 
 const enemy = new Enemy();
 
-const audio = new Audio('audio/platformer_level03.mp3');
-// audio.play();
+const audio = new Audio('./audio/platformer_level03.mp3');
+audio.play();
 
 console.log(player)
 console.log(enemy)
@@ -37,9 +37,9 @@ timeBar.setAttribute("class", "timeBar");
 parentBoard.appendChild(timeBar);
 let timeCount = 30;
 
-// setInterval(() => {
-//   timeCount--;
-// }, 1000)
+setInterval(() => {
+  timeCount--;
+}, 1000)
 
 ///////////// SETTINGS/////////////////////////////////
 
@@ -247,12 +247,11 @@ function gameLoop() {
     enemy.reappear();
   }
 
-  //// Push
 
 
  
   ////////////////  Damage
-  //groundDamange();
+  groundDamange();
 
   requestAnimationFrame(gameLoop);    // This keeps the loop running
 }
