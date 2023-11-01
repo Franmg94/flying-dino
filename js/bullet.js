@@ -18,7 +18,7 @@ export default class Bullet {
         const parentBoard = document.getElementById("board");
         parentBoard.appendChild(this.bullet);
 
-        console.log('I\'m bullet');
+        // console.log('I\'m bullet');
         this.move(); 
     }
 

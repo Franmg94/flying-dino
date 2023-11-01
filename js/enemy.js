@@ -1,10 +1,10 @@
 export default class Enemy {
     constructor() {
         this.positionX = 80;
-        this.positionY = 24;
+        this.positionY = Math.floor(Math.random() * 32 - 10) + 10;
         this.width = 2;
-        this.height = 5;
-        this.HP = 2;
+        this.height = 6;
+        this.lives = 2;
         this.speed = 0.2;
         this.enemy = null;
 
@@ -21,7 +21,7 @@ export default class Enemy {
 
         
     
-        this.reappear();
+        
     }
 
     moveUp() {
@@ -43,6 +43,10 @@ export default class Enemy {
         setTimeout(() => {
             this.positionX = 80;
         }, 1000);
+    }
+
+    die(){
+        this.enemy.remove()
     }
 
 

@@ -1,10 +1,10 @@
-@font-face{
+/* @font-face{
   font-family: 'CakeIcing';
   src: url(../fonts/CakeIcing.fnt) format('truetype');
-}
+} */
 
 body {
-  font-family: 'CakeIcing', sans-serif;
+  /* font-family: 'CakeIcing', sans-serif; */
   background: black;
   position: relative;
   height: 100vh;
@@ -20,7 +20,7 @@ body {
   height: 90vh;
   width: 80vw;
   overflow: hidden;
-  background-image: url('../images/background-mountains.png'); 
+  background-image: url('../images/background-mountains-clouds.png'); 
   background-size: cover; 
   background-repeat: no-repeat;
   background-position: center center;
@@ -30,6 +30,12 @@ body {
   bottom:0;
 }
 
+.clouds{
+  background-image: url('../images/frond-clouds.png');
+  background-size: cover; 
+  background-repeat: no-repeat;
+  background-position: center center;
+}
 
 .obstacle {
   position: absolute;
@@ -43,6 +49,7 @@ body {
 
 
 .enemy{
+  z-index: 10;
   position: absolute;
   background-image: url('../images/enemy.gif');
   background-size: cover;
@@ -108,7 +115,7 @@ body {
 
 
 #page-gameover{
-  font-family: 'CakeIcing', sans-serif;
+  /* font-family: 'CakeIcing', sans-serif; */
   background-image: url('../images/background-mountain-dark.png');
   display: flex;
   flex-direction: column;

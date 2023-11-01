@@ -105,10 +105,10 @@ export default class Player {
   shoot() {
 
     this.shootPressed = true;
-    console.log("shoot " + this.shootPressed );
+    // console.log("shoot " + this.shootPressed );
     setTimeout(() => {
       this.shootPressed = false
-      console.log("shoot " + this.shootPressed)
+      // console.log("shoot " + this.shootPressed)
     },100)
     
   }

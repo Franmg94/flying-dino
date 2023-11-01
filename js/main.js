@@ -28,10 +28,16 @@ const enemy = new Enemy();
 // const audioGameover = document.getElementById('gameover-music')
 // audioGameover.play();
 
+////// Clouds
+const parentBoard = document.getElementById("board");
+
+const cloudsDecoration = document.createElement('div');
+cloudsDecoration.setAttribute("class", "clouds");
+parentBoard.appendChild(cloudsDecoration);
+
 ////////////////////////////////////////////// HP Bar
 const lives = document.createElement('div')
 lives.setAttribute("class", "healthBar")
-const parentBoard = document.getElementById("board");
 parentBoard.appendChild(lives);
 
 ////////////////////////////////////////////////////// Timer Bar
@@ -55,10 +61,8 @@ const playerShoot = function shootBullet(){
   }
 }
 
-function bulletDmg(){};
 
-
-const groundDamange = function livesCount() {
+const groundDamage = function livesCount() {
   if (player.positionY <= 0) {
     player.lives--;
   }  
@@ -67,9 +71,14 @@ const groundDamange = function livesCount() {
   }  
 }  
 
+setInterval(() => {               //////////////// enemy CREATION
+  const newEnemy = new Enemy();
+  enemyArr.push(newEnemy);
+}, 30);
+
 setInterval(() => {         //////////////////////// obstacle CREATION
   const newObstacle = new Obstacle();
-  obstaclesArr.push(newObstacle)
+  obstaclesArr.push(newObstacle);
 }, 2000);
 
 
@@ -99,7 +108,6 @@ function onPlatform(r1, r2) {       ////////////////////////////// Detect COLLIS
 }
 
 
-
 function onTop(r1, r2) {         ////////////////////////////// Detect COLLISION 
   if (
     r1.positionX < r2.positionX + r2.width &&
@@ -107,7 +115,7 @@ function onTop(r1, r2) {         ////////////////////////////// Detect COLLISION
     r1.positionY < r2.positionY + r2.height &&
     r1.positionY + r1.height > r2.positionY
   ) {
-    console.log('onTop: touched')
+    // console.log('onTop: touched')
     player.onGround = true;
     player.gravityOn = false;
   };
@@ -120,7 +128,7 @@ function enemyPush(player, enemy) {        ////////////////////////////// Detect
     player.positionY < enemy.positionY + enemy.height &&
     player.positionY + player.height > enemy.positionY
   ) {
-    console.log('enemyPush: Touched enemy');
+    // console.log('enemyPush: Touched enemy');
     player.onWall = true;
     player.positionX -= enemy.speed;
     player.lives--;
@@ -128,61 +136,110 @@ function enemyPush(player, enemy) {        ////////////////////////////// Detect
     player.gravityOn = false;
   }
 }
+////////////////////////////// Detect COLLISION 
 
+function platformPush(player, platform) {        ////////////////////////////// Detect COLLISION 
+  if (
+    player.positionX < platform.positionX + platform.width &&
+    player.positionX + player.width > platform.positionX &&
+    player.positionY < platform.positionY + platform.height &&
+    player.positionY + player.height > platform.positionY
+  ) {
+    // console.log('platformPush: ');
+    player.onWall = true;
+    player.positionX -= platform.speed;
+    player.move();
+    player.gravityOn = false;
+  }
+}
 
+//   if (
+//     bullet.positionX < enemy.positionX + enemy.width &&
+//     bullet.positionX + bullet.width > enemy.positionX &&
+//     bullet.positionY < enemy.positionY + enemy.height &&
+//     bullet.positionY + bullet.height > enemy.positionY
+//   ) {
+//     console.log('bulletDmg: Touched enemy');
+//     enemy.lives--;
+//     console.log(enemy.lives);
+//   }
+// }
+
+function bulletPush(r1, r2) {        
+  if (
+    r1.positionX < r2.positionX + r2.width &&
+    r1.positionX + r1.width > r2.positionX &&
+    r1.positionY < r2.positionY + r2.height &&
+    r1.positionY + r1.height > r2.positionY
+  ) {
+    console.log('bullet: Touched enemy');
+    r2.lives--;
+    console.log(r2.lives);
+  }
+}
+const bulletDmg = function bulletDmg(bulletArr, enemyArr){       
+for(const bullet of bulletArr){
+  for(const enemy of enemyArr){
+    bulletPush(bullet,enemy)
+  }
+}
+}
+function deadEnemy(){
+  if(enemy.lives === 0){
+    enemy.remove();
+  }
+};
 
 function gameLoop() {             ///////////////////// Game loop  
 
-  ///////////////// Character update
+  /////////////////  Objects Movement
   player.move();
   player.gravity();
-
-  bulletArr.forEach(bullet => bullet.move());
-  playerShoot();
 
   enemy.moveLeft();
   obstaclesArr.forEach(obstacle=>obstacle.moveLeft());
 
- 
 
+  //////////////////////// Bullet //////////////////////////
+  
+  bulletArr.forEach(bullet => bullet.move());
+  playerShoot();
+
+  bulletDmg(bulletArr, enemyArr);
+  // deadEnemy();
   ///////////////////// Enemy/////////////////
 
   if (enemy.positionX < 0) {
     enemy.reappear();
   }
+  // enemyArr.forEach((enemy) => {
+  //   if(enemy.lives < 0){
+  //     enemy.splice(enemy[0],1)
+  //   }
+  // })
  
-
   ////////////////  Damage
-  groundDamange();
-
-  ///////////////////////////////// PUSH 
+  groundDamage();
   enemyPush(player, enemy);
 
-  obstaclesArr.forEach(obstacle=>enemyPush(player, obstacle));
-  
 
   ///////////////////////////////////////////Update Bars
   lives.innerHTML = 'HP ' + player.lives;
   timeBar.innerHTML = 'Time ' + timeCount;
 
 
-  /////////////////////////// Win condition
-  if (timeCount === 0) {
+  
+  if (timeCount === 0) {          /////////////////////////// Win condition
     location.href = "./win.html"
   }
 
   
   onPlatform(player, platform);     //////////////////////   On the platform
-
-
-  obstaclesArr.forEach((obstacle) => {    /////// on the obstacle
-    onTop(player, obstacle);
-  })
+  obstaclesArr.forEach(obstacle => onTop(player, obstacle)); 
+  obstaclesArr.forEach(obstacle=>platformPush(player, obstacle));   // moves character while on top
   
 
-  
-
-  requestAnimationFrame(gameLoop);    // This keeps the loop running
+  requestAnimationFrame(gameLoop); 
 }
 ////////////////////////////////////////////////////
 
