@@ -84,10 +84,9 @@ setInterval(() => {
   obstaclesArr.push(newObstacle)
 }, 2000);
 
-////////////////////////////////////////////// Obstacle MOVEMENT and REMOVE obstacle
+////////////////////////////////////////////// obstacle REMOVE 
 setInterval(() => {
   obstaclesArr.forEach((obstacle) => {
-    obstacle.moveLeft();
     if (obstacle.positionX + obstacle.width < 0) {
       obstaclesArr.splice(obstacle[0], 1);
     }
@@ -96,29 +95,29 @@ setInterval(() => {
 
 
 /////////////////////////////////////////////////////// Obstacle mov and PUSH player
-setInterval(() => {
-  obstaclesArr.forEach((obstacle) => {
-    if (collisionCheck(obstacle)) {
-      player.onWall = true;
-      player.positionX--;
-      player.move();
-    }
-  });
-}, 200);
+// setInterval(() => {
+//   obstaclesArr.forEach((obstacle) => {
+//     if (collisionCheck(obstacle)) {
+//       player.onWall = true;
+//       player.positionX--;
+//       player.move();
+//     }
+//   });
+// }, 200);
 
-
-setInterval(() => {
-    if (onTop2(player, enemy)) {
-      player.onWall = true;
-      player.positionX--;
-      player.move();
-  };
-}, 1);
+//////////////////////////   Pushing
+// setInterval(() => {
+//     if (onTop2(player, enemy)) {
+//       player.onWall = true;
+//       player.positionX--;
+//       player.move();
+//   };
+// }, 1);
 
 
 
 ////////////////////////////////////////////// Detect COLLISION 
-function platformCollision(r1, r2) {
+function onPlatform(r1, r2) {
   if (
     r1.positionX < r2.positionX + r2.width &&
     r1.positionX + r1.width > r2.positionX &&
@@ -126,7 +125,7 @@ function platformCollision(r1, r2) {
     r1.positionY + r1.height > r2.positionY
   ) {
     player.onGround = true;
-    console.log('plaformCollision: on platform')
+    // console.log('onPlatform: on platform')
   } else {
     player.onGround = false;
   }
@@ -147,17 +146,17 @@ function onTop(r1, r2) {
     player.gravityOn = false;
   };
 };
-function onTop2(r1, r2) {
-  if (
-    r1.positionX < r2.positionX + r2.width &&
-    r1.positionX + r1.width > r2.positionX &&
-    r1.positionY < r2.positionY + r2.height &&
-    r1.positionY + r1.height > r2.positionY
-  ) {
-    console.log('onTop2: touched enemy')
+// function onTop2(r1, r2) {
+//   if (
+//     r1.positionX < r2.positionX + r2.width &&
+//     r1.positionX + r1.width > r2.positionX &&
+//     r1.positionY < r2.positionY + r2.height &&
+//     r1.positionY + r1.height > r2.positionY
+//   ) {
+//     console.log('onTop2: touched enemy')
    
-  };
-};
+//   };
+// };
 
 function enemyPush(player, enemy) {
   if (
@@ -175,39 +174,39 @@ function enemyPush(player, enemy) {
 }
 
 
-function collisionCheck(obstacle) {
-  if (
-    player.positionX < obstacle.positionX + obstacle.width &&
-    player.positionX + player.width > obstacle.positionX &&
-    player.positionY < obstacle.positionY + obstacle.height &&
-    player.positionY + player.height > obstacle.positionY
-  ) {
-    player.onWall = true;
-    return true;
-  } else {
-    player.onWall = false;
-    return false;
-  }
-};
+// function collisionCheck(obstacle) {
+//   if (
+//     player.positionX < obstacle.positionX + obstacle.width &&
+//     player.positionX + player.width > obstacle.positionX &&
+//     player.positionY < obstacle.positionY + obstacle.height &&
+//     player.positionY + player.height > obstacle.positionY
+//   ) {
+//     player.onWall = true;
+//     return true;
+//   } else {
+//     player.onWall = false;
+//     return false;
+//   }
+// };
 
 
-function collisionPush(enemy) {
-  if (
-    player.positionX < enemy.positionX + enemy.width &&
-    player.positionX + player.width > enemy.positionX &&
-    player.positionY < enemy.positionY + enemy.height &&
-    player.positionY + player.height > enemy.positionY
-  ) {
-    console.log('collsionPush: touched')
-    player.onWall = true;
-    player.positionX--;
-    player.move();
-    return true;
-  } else {
-    player.onWall = false;
-    return false;
-  }
-};
+// function collisionPush(enemy) {
+//   if (
+//     player.positionX < enemy.positionX + enemy.width &&
+//     player.positionX + player.width > enemy.positionX &&
+//     player.positionY < enemy.positionY + enemy.height &&
+//     player.positionY + player.height > enemy.positionY
+//   ) {
+//     console.log('collsionPush: touched')
+//     player.onWall = true;
+//     player.positionX--;
+//     player.move();
+//     return true;
+//   } else {
+//     player.onWall = false;
+//     return false;
+//   }
+// };
 
 
 
@@ -219,8 +218,14 @@ function gameLoop() {
   player.gravity();
 
   enemy.moveLeft();
-  onTop2(player, enemy);
+  obstaclesArr.forEach(obstacle=>obstacle.moveLeft());
+
+  // onTop2(player, enemy);
+
+  ///////////////////////////////// PUSH 
   enemyPush(player, enemy);
+  obstaclesArr.forEach(obstacle=>enemyPush(player, obstacle));
+  
   ///////////////////////////////////////////Update Bars
   lives.innerHTML = 'HP' + player.lives;
   timeBar.innerHTML = 'Time' + timeCount;
@@ -231,18 +236,19 @@ function gameLoop() {
   }
 
   //////////////////////   On the platform
-  platformCollision(player, platform);
+  onPlatform(player, platform);
 
   // Stays on TOP!!
   obstaclesArr.forEach((obstacle) => {
     onTop(player, obstacle);
   })
   
-  obstaclesArr.forEach((obstacle) => {
-    if (collisionCheck(obstacle)) {
-      player.onWall = true;
-    }
-  })
+  // obstaclesArr.forEach((obstacle) => {
+  //   if (collisionCheck(obstacle)) {
+  //     console.log('player on')
+  //     player.onWall = true;
+  //   }
+  // })
 
   ///////////////////// Enemy/////////////////
 
