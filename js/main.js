@@ -2,7 +2,7 @@ import Player from "./player.js";
 import Obstacle from "./obstacle.js";
 import Enemy from "./enemy.js";
 import Platform from "./platform.js";
-import Bullet from "./bullet.js";
+// import Bullet from "./bullet.js";
    
 
 /////////////// GAME INITIALIZE   ///////////////////////////
@@ -15,8 +15,8 @@ const player = new Player();
 const platform = new Platform();
 const obstaclesArr = [];
 
-let bullet = new Bullet(this.positionX, this.positionY);
-bullet.moveRight() 
+// const bullet = new Bullet();
+
 
 const enemy = new Enemy();
 

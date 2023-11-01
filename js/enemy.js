@@ -13,14 +13,14 @@ export default class Enemy {
         this.enemy.style.width = this.width + 'em';
         this.enemy.style.height = this.height + 'em';
         this.enemy.style.left = this.positionX + "vw";
-        this.enemy.style.top = this.positionY + "vh";
+        this.enemy.style.bottom = this.positionY + "vh";
 
 
         const parentBoard = document.getElementById("board");
         parentBoard.appendChild(this.enemy);
 
-        console.log('I\'m here');
-        // this.push();
+        
+    
         this.reappear();
     }
 

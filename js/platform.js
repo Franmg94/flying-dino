@@ -2,15 +2,15 @@ export default class Platform {
   constructor() {
     this.width = 11;
     this.height = 8;
-    this.positionY = 16;
+    this.positionY = 25;
     this.positionX = 0;
     this.platform = null;
 
     this.platform = document.getElementById('platform');
-    this.platform.style.width = this.width + 'vw';
-    this.platform.style.height = this.height + 'vw';
-    this.platform.style.bottom = this.positionY + 'em'
-    this.platform.style.left = this.positionX + 'em'
+    this.platform.style.width = this.width + 'em';
+    this.platform.style.height = this.height + 'em';
+    this.platform.style.left = this.positionX + 'vw'
+    this.platform.style.bottom = this.positionY + 'vh'
 
    // this.ground();
   }

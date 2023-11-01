@@ -1,4 +1,4 @@
-import Bullet from "./bullet.js ";
+// import Bullet from "./bullet.js ";
 
 export default class Player {
   constructor() {
@@ -99,7 +99,7 @@ export default class Player {
   shoot() {
     console.log("shoot");
     let bullet = new Bullet(this.positionX, this.positionY);
-   
+    bullet.moveRight()
   }
 
   gravity() {
