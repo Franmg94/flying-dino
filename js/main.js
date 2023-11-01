@@ -19,9 +19,14 @@ const bulletArr = [];
 
 const enemy = new Enemy();
 
-const audio = new Audio('./audio/platformer_level03.mp3');
-// audio.play();
+// const audioOnGame = document.getElementById('onGame-music');
+// audioOnGame.play();
 
+// const audioWin = document.getElementById('win-music');
+// audioWin.play();
+
+// const audioGameover = document.getElementById('gameover-music')
+// audioGameover.play();
 
 ////////////////////////////////////////////// HP Bar
 const lives = document.createElement('div')
