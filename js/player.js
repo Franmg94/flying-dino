@@ -1,15 +1,17 @@
-// import Bullet from "./bullet.js ";
+import Bullet from "./bullet.js ";
+
 
 export default class Player {
   constructor() {
     // initialize properties
     this.width = 2;
-    this.height = 4;
+    this.height = 6;
     this.positionX = 1;
     this.positionY = 40;
     this.speed = 0.5;
     this.player = null;
     this.lives = 100;
+    this.shootPressed = false;
 
     this.gravityOn = true;
     this.onGround = false;
@@ -91,14 +93,23 @@ export default class Player {
   };
 
   jump() {
-    this.positionY += 15;
-    this.player.style.bottom = this.positionY + "em";
-    this.onGround = false;
+    console.log('jump')
+    if(this.onGround){
+      this.positionY += this.speed;
+      this.player.style.bottom = this.positionY + "em";
+      this.onGround = false;
+    }
+   
   }
 
   shoot() {
-    console.log("shoot");
-    let bullet = new Bullet(this.positionX, this.positionY);
+
+    this.shootPressed = true;
+    console.log("shoot " + this.shootPressed );
+    setTimeout(() => {
+      this.shootPressed = false
+      console.log("shoot " + this.shootPressed)
+    },100)
     
   }
 
@@ -109,7 +120,7 @@ export default class Player {
     } else if (this.onGround === false && this.positionY > 0) {
       this.gravityOn = true;
       this.onGround = false;
-      this.positionY -= 0.3;
+      this.positionY -= 0.5;
       this.move();
     } else if (this.positionY === 0) {
       this.onGround = true;
@@ -117,95 +128,5 @@ export default class Player {
     }
   }
 }
-
-
-// export default class Player {
-//   constructor() {
-//     // initialize properties
-//     this.width = 2;
-//     this.height = 4;
-//     this.positionX = 1;
-//     this.positionY = 24;
-//     this.speed = 4;
-//     this.player = null;
-//     this.lives = 100;
-
-//     this.gravityOn = true;
-//     this.onGround = false;
-//     this.onWall = false; 
-
-
-//     //dom manipulation
-//     this.player = document.getElementById('player');
-//     this.player.style.width = this.width + "em";
-//     this.player.style.height = this.height + "em";
-//     this.player.style.left = this.positionX + "vw";
-//     this.player.style.bottom = this.positionY + "vh";
-
-//     this.move();
-//     this.gravity();
-    
-    
-//   }
-// move(){      
-//       this.player.style.left = this.positionX + "em";
-//       this.player.style.bottom = this.positionY + "em";
-      
-//   }
-  
-// moveRight() {
-//     if (!this.onWall) {
-//       this.positionX++;
-//       this.move();
-//     }
-//   }
-
-//   moveLeft() {
-//     this.positionX--;
-//     this.move();
-//   }
-
-//   // moveUp() {
-//   //   this.positionY++;
-//   //   this.move();
-//   // }
-
-//   moveDown() {
-//     if (!this.onGround) {
-//       this.positionY--;
-//       this.move();
-//     }
-//   }
-// jump(){
-//   this.positionY += 15 ; 
-//   this.player.style.bottom = this.positionY + "em";
-//   this.onGround = false;
-// };
-// shoot(){
- 
-//     console.log("shoot");
-//     let speed = 5;
-//     let delay = 5;
-  
-// }
-// gravity() {
-//   if(this.onGround) {
-//     this.gravityOn = false
-//     this.onGround = true
-//   } else if (this.onGround === false && this.positionY > 0) {
-//     this.gravityOn = true;
-//     this.onGround = false;
-//     this.positionY -=  0.3;
-//      this.move();
-//   } else if(this.positionY === 0){
-//     this.onGround = true;
-//     this.gravityOn = false;
-//   }
-// }
-// }
-
-
-
-/////////////////
 
 
