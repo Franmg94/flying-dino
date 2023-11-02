@@ -1,25 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Project</title>
     <link rel="stylesheet" href="./css/main.css">
 </head>
+
 <body>
-    <div id="board">
-        <div id="player"></div>
-        <div id="platform"></div>
-        
+    <!-- <div class="onGame">
+        <div id="board">
+            <div id="player"></div>
+            <div id="platform"></div>
+        </div>
     </div>
-    
-    <audio id="onGame-music" autoplay loop>
+    -->
+
+    <div class="instructions">
+        <div id="startScreen" >
+            <h1>Welcome to Flying Dino</h1>
+            <img src="./images/dino.gif" alt="dino gif">
+            <p><strong><em>Help Dino to survive the Apocalipse!</em></strong></p>
+            <p>Watch out for your health points <strong>(HP)</strong> - if they reach 0, it's Game Over.</p>
+            <p>Stay away from falling platforms and avoid getting hit by enemies to preserve your HP.</p>
+            <p><strong><em>Your goal:</em></strong> Survive for one minute to claim victory.</p>
+            <p>Use the Arrow keys to move Dino.</p>
+            <a href="start.html">Start Game</a>
+            <button id="startBtn" class="startBtn"></button>
+        </div>
+    </div>
+
+    <!-- <audio id="onGame-music" autoplay loop>
         <source src="./audio/onGame.wav">
-    </audio>
+    </audio> -->
 
     <script type="module" src="./js/main.js"></script>
     <!-- <script type="text/javascript" src="./js/healtbar.js"></script>
     <script type="text/javascript" src="./js/player.js"></script>
     <script type="text/javascript" src="./js/obstacle.js"></script> -->
 </body>
+
 </html>

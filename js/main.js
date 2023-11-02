@@ -10,14 +10,17 @@ import Bullet from "./bullet.js";
 
 console.log(VisualViewport)
 
+function startGame(){
+  
+}
 
 const player = new Player();
 const platform = new Platform();
 const obstaclesArr = [];
 const bulletArr = [];
-
 const enemyArr = [];
-const enemy = new Enemy();
+
+// const enemy = new Enemy();
 
 // const audioOnGame = document.getElementById('onGame-music');
 // audioOnGame.play();
@@ -54,15 +57,13 @@ setInterval(() => {    /// Countdown
 ///////////// SETTINGS/////////////////////////////////
 
 
-const playerShoot = function shootBullet(){
+const playerShoot = function shootBullet(){         //// Player functions
   if(player.shootPressed){
     const bullet = new Bullet(player.positionX, player.positionY);
     bulletArr.push(bullet);
   }
 }
-
-
-const groundDamage = function livesCount() {
+const groundDamage = function livesCount() {        
   if (player.positionY <= 0) {
     player.lives--;
   }  
@@ -71,10 +72,44 @@ const groundDamage = function livesCount() {
   }  
 }  
 
-setInterval(() => {               //////////////// enemy CREATION
+const bulletPush = function bulletPush(r1, r2,i) {       //// bullet TOUCH enemy
+  if (
+    r1.positionX < r2.positionX + r2.width &&
+    r1.positionX + r1.width > r2.positionX &&
+    r1.positionY < r2.positionY + r2.height &&
+    r1.positionY + r1.height > r2.positionY
+  ) {
+    console.log('bullet: Touched enemy');
+    r2.lives--;
+    if(r2.lives <= 0){
+      r2.enemy.remove()
+      enemyArr.splice(i,1)
+    }
+    console.log(r2.lives);
+  }
+}
+const bulletDmg = function bulletDmg(bulletArr, enemyArr){      /// bullet DMG enemy   
+for(const bullet of bulletArr){
+  enemyArr.forEach((enemy, i)=>{bulletPush(bullet,enemy,i)})
+}
+}
+
+setInterval(() => {               /////////////////////// enemy CREATION
   const newEnemy = new Enemy();
   enemyArr.push(newEnemy);
-}, 30);
+}, 3000);
+
+const enemyReappear = function enemyReappear(){enemyArr.forEach((enemy)=>{        // enemy REAPPEAR
+  if (enemy.positionX < 0) {
+    enemy.reappear(); 
+  }})} ;
+
+const deadEnemy = function(){enemyArr.filter((enemy) => enemy.lives <= 0)};   //// enemy DEAD
+
+  // function createEnemy(){
+//   const newEnemy = new Enemy();
+//   enemyArr.push(newEnemy);
+// };
 
 setInterval(() => {         //////////////////////// obstacle CREATION
   const newObstacle = new Obstacle();
@@ -136,7 +171,6 @@ function enemyPush(player, enemy) {        ////////////////////////////// Detect
     player.gravityOn = false;
   }
 }
-////////////////////////////// Detect COLLISION 
 
 function platformPush(player, platform) {        ////////////////////////////// Detect COLLISION 
   if (
@@ -165,38 +199,22 @@ function platformPush(player, platform) {        ////////////////////////////// 
 //   }
 // }
 
-function bulletPush(r1, r2) {        
-  if (
-    r1.positionX < r2.positionX + r2.width &&
-    r1.positionX + r1.width > r2.positionX &&
-    r1.positionY < r2.positionY + r2.height &&
-    r1.positionY + r1.height > r2.positionY
-  ) {
-    console.log('bullet: Touched enemy');
-    r2.lives--;
-    console.log(r2.lives);
-  }
-}
-const bulletDmg = function bulletDmg(bulletArr, enemyArr){       
-for(const bullet of bulletArr){
-  for(const enemy of enemyArr){
-    bulletPush(bullet,enemy)
-  }
-}
-}
-function deadEnemy(){
-  if(enemy.lives === 0){
-    enemy.remove();
-  }
-};
 
-function gameLoop() {             ///////////////////// Game loop  
+// function deadEnemy(){
+//   if(enemy.lives === 0){
+//     enemy.remove();
+//   }
+// };
+
+function gameLoop() {             ///////////////////// Game loop  //////////////////////////////////////
 
   /////////////////  Objects Movement
   player.move();
   player.gravity();
 
-  enemy.moveLeft();
+  // createEnemy();
+  enemyArr.forEach(enemy => enemy.moveLeft());
+  // enemy.moveLeft();
   obstaclesArr.forEach(obstacle=>obstacle.moveLeft());
 
 
@@ -205,22 +223,25 @@ function gameLoop() {             ///////////////////// Game loop
   bulletArr.forEach(bullet => bullet.move());
   playerShoot();
 
+  
   bulletDmg(bulletArr, enemyArr);
   // deadEnemy();
+
   ///////////////////// Enemy/////////////////
 
-  if (enemy.positionX < 0) {
-    enemy.reappear();
-  }
-  // enemyArr.forEach((enemy) => {
+    enemyReappear()
+    deadEnemy();
+
+  // enemyArr.forEach((enemy, index) => {
   //   if(enemy.lives < 0){
-  //     enemy.splice(enemy[0],1)
+  //     enemy.splice(index,1)
   //   }
   // })
  
   ////////////////  Damage
   groundDamage();
-  enemyPush(player, enemy);
+  enemyArr.forEach((enemy)=>enemyPush(player, enemy));
+  // enemyPush(player, enemy);
 
 
   ///////////////////////////////////////////Update Bars

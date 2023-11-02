@@ -2,7 +2,9 @@
   font-family: 'PressStart2p';
   src: url('../fonts/PressStart2P-Regular.ttf') format('truetype');
 }
-
+.hidden{
+  display: none;
+}
 body {
   font-family: 'PressStart2p';
   background: black;
