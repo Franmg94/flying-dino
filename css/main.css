@@ -1,10 +1,10 @@
-/* @font-face{
-  font-family: 'CakeIcing';
-  src: url(../fonts/CakeIcing.fnt) format('truetype');
-} */
+@font-face {
+  font-family: 'PressStart2p';
+  src: url('../fonts/PressStart2P-Regular.ttf') format('truetype');
+}
 
 body {
-  /* font-family: 'CakeIcing', sans-serif; */
+  font-family: 'PressStart2p';
   background: black;
   position: relative;
   height: 100vh;
@@ -12,6 +12,14 @@ body {
   background-size: cover;
 }
 
+a {
+  font-size: 5vh;
+  color:transparent;
+  -webkit-text-stroke: 1px #0ff;;
+  text-decoration: none;
+  text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+  margin-bottom: 30vh;
+}
 
 #board {
   margin: auto;
@@ -115,7 +123,6 @@ body {
 
 
 #page-gameover{
-  /* font-family: 'CakeIcing', sans-serif; */
   background-image: url('../images/background-mountain-dark.png');
   display: flex;
   flex-direction: column;
@@ -129,10 +136,9 @@ body {
   text-shadow: 2px 2px 4px black;
   color:transparent;
   -webkit-text-stroke: 1px black;
-  
 }
 
-#page-gameover a{
+/* #page-gameover a{
   font-size: 5vh;
   color:transparent;
   -webkit-text-stroke: 1px #0ff;;
@@ -140,10 +146,9 @@ body {
   text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
   
 
-}
+} */
 
 #win-page{
-  font-family: 'CakeIcing', sans-serif;
   background-image: url('../images/background-win.png');
   background-size: cover;
   background-repeat: no-repeat;
@@ -167,4 +172,31 @@ body {
   text-decoration: none;
   text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
   margin-bottom: 30vh;
+}
+
+.instructions{
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+.instructions img{
+  width: 10em;
+}
+.instructions p{
+  background-color: rgba(255, 0, 0, 0.30);
+  padding: 0.3em;
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(0,0,0,0.2)
+}
+.instructions h1 {
+  font-size: 8vh;
+  text-shadow: 2px 2px 4px white;
+  color:transparent;
+  -webkit-text-stroke: 1px black;
+}
+.instructions a{
+  margin-top: 1.5em;
 }

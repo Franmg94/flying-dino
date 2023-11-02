@@ -4,8 +4,8 @@ import Bullet from "./bullet.js ";
 export default class Player {
   constructor() {
     // initialize properties
-    this.width = 2;
-    this.height = 6;
+    this.width = 3;
+    this.height = 8;
     this.positionX = 1;
     this.positionY = 40;
     this.speed = 0.5;
@@ -120,7 +120,7 @@ export default class Player {
     } else if (this.onGround === false && this.positionY > 0) {
       this.gravityOn = true;
       this.onGround = false;
-      this.positionY -= 0.5;
+      this.positionY -= 0.7;
       this.move();
     } else if (this.positionY === 0) {
       this.onGround = true;
