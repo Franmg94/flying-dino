@@ -2,7 +2,7 @@ export default class Platform {
   constructor() {
     this.width = 11;
     this.height = 8;
-    this.positionY = 25;
+    this.positionY = 40;
     this.positionX = 0;
     this.platform = null;
 

@@ -7,11 +7,11 @@ export default class Obstacle {
     this.speed = 0.2;
     this.obstacle = null;
 
-   
+
 
     this.obstacle = document.createElement("div");
 
-    this.obstacle.classList.add("obstacle");
+    this.obstacle.classList.add("obstacle", "img-cover");
     this.obstacle.style.width = this.width + "vw";
     this.obstacle.style.height = this.height + "vh";
     this.obstacle.style.left = this.positionX + "vw";
@@ -24,4 +24,4 @@ export default class Obstacle {
     this.positionX -= this.speed;
     this.obstacle.style.left = this.positionX + "vw";
   }
-  }
+}

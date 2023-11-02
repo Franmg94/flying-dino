@@ -1,34 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>On Game</title>
     <link rel="stylesheet" href="./css/main.css">
 </head>
-<body >
- <div class="onGame">
-        <div id="board">
+
+<body>
+    <div class="onGame">
+        <div id="board" class="img-cover">
             <div id="player"></div>
             <div id="platform"></div>
         </div>
     </div>
-   
-
-    <!-- <div class="instructions">
-    <h1>Welcome to Flying Dino</h1>
-    <img src="./images/dino.gif" alt="dino gif">
-    <p><strong><em>Help Dino to survive the Apocalipse!</em></strong></p>
-    <p>Watch out for your health points <strong>(HP)</strong> - if they reach 0, it's Game Over.</p>
-    <p>Stay away from falling platforms and avoid getting hit by enemies to preserve your HP.</p>
-    <p><strong><em>Your goal:</em></strong> Survive for one minute to claim victory.</p>
-    <p>Use the Arrow keys to move Dino.</p>
-    <a href="index.html">Start Game</a> -->
-
     </div>
-    
-   
 
+    <audio id="onGame-music" autoplay loop>
+        <source src="./audio/onGame.wav">
+    </audio>
+    
     <script type="module" src="./js/main.js"></script>
 </body>
+
 </html>

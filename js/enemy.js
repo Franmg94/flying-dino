@@ -5,11 +5,11 @@ export default class Enemy {
         this.width = 2;
         this.height = 6;
         this.lives = 2;
-        this.speed = 0.2;
+        this.speed = 0.4 ;
         this.enemy = null;
 
         this.enemy = document.createElement('div');
-        this.enemy.classList.add("enemy");
+        this.enemy.classList.add("enemy" , "img-cover");
         this.enemy.style.width = this.width + 'vw';
         this.enemy.style.height = this.height + 'vh';
         this.enemy.style.left = this.positionX + "vw";
@@ -30,13 +30,17 @@ export default class Enemy {
     }
 
     moveDown() {
-        this.positionY -= this.speed;
-        this.enemy.style.bottom = this.positionY + "vh";
+        if(this.positionY > 70){
+            this.positionY -= this.speed;
+            this.enemy.style.bottom = this.positionY + "vh";
+        }
+        
     }
 
     moveLeft() {
         this.positionX -= this.speed;
         this.enemy.style.left = this.positionX + "vw";
+        setInterval(()=>{this.moveUp()},1000) 
     }
 
     reappear() {

@@ -7,7 +7,7 @@ export default class Player {
     this.width = 3;
     this.height = 8;
     this.positionX = 1;
-    this.positionY = 40;
+    this.positionY = 45;
     this.speed = 0.5;
     this.player = null;
     this.lives = 100;
@@ -24,6 +24,7 @@ export default class Player {
 
     //dom manipulation
     this.player = document.getElementById('player');
+    this.player.classList.add("img-cover")
     this.player.style.width = this.width + "vw";
     this.player.style.height = this.height + "vh";
     this.player.style.left = this.positionX + "vw";

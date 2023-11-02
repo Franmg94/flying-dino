@@ -4,41 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Project</title>
+    <title>Start Screen</title>
     <link rel="stylesheet" href="./css/main.css">
 </head>
 
-<body>
-    <!-- <div class="onGame">
-        <div id="board">
-            <div id="player"></div>
-            <div id="platform"></div>
-        </div>
-    </div>
-    -->
+<body class="box">
 
     <div class="instructions">
         <div id="startScreen" >
-            <h1>Welcome to Flying Dino</h1>
-            <img src="./images/dino.gif" alt="dino gif">
-            <p><strong><em>Help Dino to survive the Apocalipse!</em></strong></p>
-            <p>Watch out for your health points <strong>(HP)</strong> - if they reach 0, it's Game Over.</p>
-            <p>Stay away from falling platforms and avoid getting hit by enemies to preserve your HP.</p>
-            <p><strong><em>Your goal:</em></strong> Survive for one minute to claim victory.</p>
-            <p>Use the Arrow keys to move Dino.</p>
+            <h1 class="white-h1">Welcome to Flying Dino</h1>
+            <h2>Help Dino to survive the Apocalipse!</h2>
+                <div class="instructions-box">
+                    <p><strong><em>Your goal:</em></strong> 
+                    <p>Survive for one minute to claim victory.</p>
+                    <br>
+                    <p>Watch your health points <strong>(HP)</strong> - hit 0, and it's Game Over.</p>
+                    <p>Avoid falling platforms and enemy hits to stay alive.</p>
+                    <br>
+                    <p><em>Use the <strong>> Arrow keys <</strong> to move Dino.</em></p>
+                    <p><em>Shoot with Space Bar</em></p>
+                </div>
+            
             <a href="start.html">Start Game</a>
-            <button id="startBtn" class="startBtn"></button>
+            <img src="./images/dino.gif" alt="dino gif">
         </div>
     </div>
 
-    <!-- <audio id="onGame-music" autoplay loop>
-        <source src="./audio/onGame.wav">
-    </audio> -->
 
     <script type="module" src="./js/main.js"></script>
-    <!-- <script type="text/javascript" src="./js/healtbar.js"></script>
-    <script type="text/javascript" src="./js/player.js"></script>
-    <script type="text/javascript" src="./js/obstacle.js"></script> -->
 </body>
 
 </html>
