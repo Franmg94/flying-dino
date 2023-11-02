@@ -27,13 +27,16 @@ parentBoard.appendChild(lives);
 const timeBar = document.createElement('div');
 timeBar.setAttribute("class", "timeBar");
 parentBoard.appendChild(timeBar);
-let timeCount = 30;
+let timeCount = 60;
 
-const countDown = setInterval(() => { 
-  timeCount--;
-}, 1000)
+////////////////////////////////////////////////// Score Bar
+const scoreBar = document.createElement('div');
+scoreBar.setAttribute("class", "scoreBar");
+parentBoard.appendChild(scoreBar);
+let score = 0;
 
 
+const countDown = setInterval(() => {timeCount--;}, 1000);
 
 const playerShoot = function shootBullet() { 
   if (player.shootPressed) {
@@ -57,13 +60,12 @@ const bulletPush = function bulletPush(r1, r2, i) {
     r1.positionY < r2.positionY + r2.height &&
     r1.positionY + r1.height > r2.positionY
   ) {
-    console.log('bullet: Touched enemy');
     r2.lives--;
     if (r2.lives <= 0) {
       r2.enemy.remove()
       enemyArr.splice(i, 1)
+      score++;
     }
-    console.log(r2.lives);
   }
 }
 const bulletDmg = function bulletDmg(bulletArr, enemyArr) { 
@@ -182,7 +184,7 @@ function gameLoop() {
   //////////////////////////Update Bars
   lives.innerHTML = 'HP ' + player.lives;
   timeBar.innerHTML = 'Time ' + timeCount;
-
+  scoreBar.innerHTML = 'Score '     + score;
 
   ////////////////// Win condition
   if (timeCount === 0) {
