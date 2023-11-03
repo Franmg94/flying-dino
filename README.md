@@ -16,8 +16,10 @@ Your goal is to endure for 60 seconds and strive to eliminate as many enemies as
 - Use the arrow keys to navigate your character.
 - Press the Space Bar to unleash powerful shots.
 
-Enjoy the adventure and have a blast as you take flight with Dino!
 
+#### Deploy link: https://franmg94.github.io/flying-dino/
+
+Enjoy the adventure and have a blast as you take flight with Dino!
 ---------------
 
 #### Acknowledgments:
